@@ -1,6 +1,6 @@
 # NetWorkingBug
 
-[XMNetworking](https://github.com/kangzubin/XMNetworking) is based on AFNetworking
+[XMNetworking](https://github.com/kangzubin/XMNetworking) is based on AFNetworking.I proposed a [PR](https://github.com/kangzubin/XMNetworking/pull/58) to XMNetworking
 
 The `master` branche is origin branche.
 
