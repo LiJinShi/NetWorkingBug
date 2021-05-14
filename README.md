@@ -1,4 +1,7 @@
 # NetWorkingBug
+
+[XMNetworking](https://github.com/kangzubin/XMNetworking) is based on AFNetworking
+
 The `master` branche is origin branche.
 
 The `Bug-Test` branche opened the bug, run the app will be crashed. xcodee log `*** -[AFJSONResponseSerializer release]: message sent to deallocated instance 0x6000035132d0`
