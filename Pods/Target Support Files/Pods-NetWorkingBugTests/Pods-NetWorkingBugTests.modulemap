@@ -1,0 +1,6 @@
+framework module Pods_NetWorkingBugTests {
+  umbrella header "Pods-NetWorkingBugTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
