@@ -343,11 +343,19 @@ static OSStatus XMExtractIdentityAndTrustFromPKCS12(CFDataRef inPKCS12Data, CFSt
                                   downloadProgress:nil
                                  completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
                                      __strong __typeof(weakSelf)strongSelf = weakSelf;
-                                     [strongSelf xm_processResponse:response
-                                                             object:responseObject
-                                                              error:error
-                                                            request:request
-                                                  completionHandler:completionHandler];
+        
+#warning test code Simulate network multithreading return
+                                    dispatch_queue_t queue = dispatch_queue_create(@"test_queue", DISPATCH_QUEUE_CONCURRENT);
+                                    for (NSInteger i = 0; i < 300; i ++) {
+                                        dispatch_async(queue, ^{
+                                            [strongSelf xm_processResponse:response
+                                                                    object:responseObject
+                                                                     error:error
+                                                                   request:request
+                                                         completionHandler:completionHandler];
+                                        });
+                                    }
+                                     
                                  }];
     
     [self xm_setIdentifierForReqeust:request taskIdentifier:dataTask.taskIdentifier sessionManager:sessionManager];
@@ -585,6 +593,10 @@ static OSStatus XMExtractIdentityAndTrustFromPKCS12(CFDataRef inPKCS12Data, CFSt
 
 - (AFJSONRequestSerializer *)afJSONRequestSerializer {
     if (!_afJSONRequestSerializer) {
+#warning test code
+        [NSThread sleepForTimeInterval:0.2];
+        
+        
         _afJSONRequestSerializer = [AFJSONRequestSerializer serializer];
         
     }
@@ -607,6 +619,10 @@ static OSStatus XMExtractIdentityAndTrustFromPKCS12(CFDataRef inPKCS12Data, CFSt
 
 - (AFJSONResponseSerializer *)afJSONResponseSerializer {
     if (!_afJSONResponseSerializer) {
+#warning test code
+        [NSThread sleepForTimeInterval:0.2];
+        
+        
         _afJSONResponseSerializer = [AFJSONResponseSerializer serializer];
         // Append more other commonly-used types to the JSON responses accepted MIME types.
         //_afJSONResponseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/plain", nil];
